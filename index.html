@@ -5,12 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Oscar Gledel</title>
   <style>
+    /* --- STYLES DU CV --- */
     body {
       font-family: "Segoe UI", Roboto, sans-serif;
       margin: 0;
       padding: 0;
       background: #f4f4f9;
       color: #333;
+      overflow-x: hidden;
     }
 
     header {
@@ -18,6 +20,8 @@
       color: white;
       text-align: center;
       padding: 2rem 1rem;
+      position: relative;
+      z-index: 2;
     }
 
     header h1 {
@@ -34,6 +38,8 @@
       max-width: 800px;
       margin: 2rem auto;
       padding: 0 1rem;
+      position: relative;
+      z-index: 2;
     }
 
     section {
@@ -61,20 +67,40 @@
       padding: 1rem;
       background: #2c3e50;
       color: white;
+      position: relative;
+      z-index: 2;
     }
 
     a {
       color: #3498db;
       text-decoration: none;
     }
+
+    /* --- CANVAS DES FLAMMES --- */
+    #flame {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
   </style>
 </head>
 
 <body>
+  <!-- Canvas pour la traînée -->
+  <canvas id="flame"></canvas>
+
   <header>
     <h1>Oscar Gledel</h1>
     <p>Étudiant en Master 2 - Intelligence Artificielle, Fondements et Applications - Spécialité Informatique Graphique et Imagerie</p>
-    <p><a href="mailto:ogledel@gmail.com">ogledel@gmail.com</a> · <a href="https://github.com/Oscosc">GitHub</a> · <a href="https://www.linkedin.com/in/oscar-gledel-2370302a9">LinkedIn</a></p>
+    <p>
+      <a href="mailto:ogledel@gmail.com">ogledel@gmail.com</a> ·
+      <a href="https://github.com/Oscosc">GitHub</a> ·
+      <a href="https://www.linkedin.com/in/oscar-gledel-2370302a9">LinkedIn</a>
+    </p>
   </header>
 
   <main>
@@ -98,5 +124,98 @@
   <footer>
     © 2025 Oscar Gledel — <a href="https://github.com/Oscosc/oscosc.github.io">Code source sur GitHub</a>
   </footer>
+
+  <!-- --- SCRIPT TRAÎNÉE DE FLAMMES --- -->
+  <script>
+  (function () {
+    const canvas = document.getElementById('flame');
+    const ctx = canvas.getContext('2d', { alpha: true });
+
+    let pointer = { x: null, y: null };
+    const params = {
+      emitPerMove: 3,
+      maxParticles: 700,
+      gravity: -0.02,
+      wind: 0,
+      particleSize: [6, 20],
+      life: [500, 1400],
+      hueStart: 48,
+      hueEnd: 10,
+      saturation: 90,
+      baseAlpha: 0.85
+    };
+
+    const particles = [];
+
+    function resize() {
+      const dpr = Math.max(1, window.devicePixelRatio || 1);
+      canvas.width = Math.round(window.innerWidth * dpr);
+      canvas.height = Math.round(window.innerHeight * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    function spawnParticle(x, y) {
+      if (particles.length >= params.maxParticles) return;
+      const size = rand(params.particleSize[0], params.particleSize[1]);
+      const life = rand(params.life[0], params.life[1]);
+      const angle = -Math.PI/2 + (Math.random() - 0.5) * Math.PI/3;
+      const speed = rand(0.1, 1.2);
+      const vx = Math.cos(angle) * speed + (Math.random() - 0.5) * 0.6;
+      const vy = Math.sin(angle) * speed + (Math.random() - 0.5) * 0.6 + params.gravity;
+      const hue = rand(params.hueStart, params.hueEnd);
+      const alpha = params.baseAlpha * (0.6 + Math.random() * 0.5);
+      particles.push({x, y, vx, vy, size, life, age: 0, hue, alpha});
+    }
+
+    function rand(a,b){return a + Math.random()*(b-a);}
+
+    window.addEventListener('mousemove', e=>{
+      pointer.x = e.clientX;
+      pointer.y = e.clientY;
+      for(let i=0;i<params.emitPerMove;i++) spawnParticle(pointer.x, pointer.y);
+    });
+
+    function update(dt){
+      for(let i=particles.length-1;i>=0;i--){
+        const p=particles[i];
+        p.age+=dt;
+        if(p.age>p.life){particles.splice(i,1);continue;}
+        p.vx += params.wind*0.001*dt;
+        p.vy += params.gravity*0.0018*dt;
+        p.x += p.vx*dt;
+        p.y += p.vy*dt;
+      }
+    }
+
+    function draw(){
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      ctx.globalCompositeOperation='lighter';
+      for(const p of particles){
+        const lifeRatio=p.age/p.life;
+        const grd=ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.size);
+        const a=p.alpha*(1-lifeRatio);
+        grd.addColorStop(0,`hsla(${p.hue},${params.saturation}%,60%,${a})`);
+        grd.addColorStop(0.5,`hsla(${p.hue},${params.saturation}%,40%,${a})`);
+        grd.addColorStop(1,`hsla(${params.hueEnd},${params.saturation}%,20%,0)`);
+        ctx.fillStyle=grd;
+        ctx.beginPath();
+        ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
+        ctx.fill();
+      }
+      ctx.globalCompositeOperation='source-over';
+    }
+
+    let last=performance.now();
+    function loop(now){
+      const dt=now-last;last=now;
+      update(dt);
+      draw();
+      requestAnimationFrame(loop);
+    }
+    requestAnimationFrame(loop);
+  })();
+  </script>
 </body>
 </html>
