@@ -4,118 +4,148 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Oscar Gledel</title>
+
   <style>
-    /* --- STRUCTURE DE LA PAGE --- */
+    /* --- PALETTE --- */
+    :root {
+      --main: #8ccfa6;          /* vert pastel principal */
+      --dark: #2f5d46;          /* vert foncé */
+      --text: #333;
+      --content-bg: #ffffff;    /* fond du cadre */
+      --outer-bg: #e9f5ef;      /* fond extérieur */
+    }
+
     html, body {
       height: 100%;
       margin: 0;
       padding: 0;
       font-family: "Segoe UI", Roboto, sans-serif;
-      background: #f4f4f9;
-      color: #333;
+      font-size: 18px;
+      background: var(--outer-bg);
     }
+
+    /* Pour mettre une IMAGE de fond à la place :
+    body {
+      background: url("images/background.jpg") no-repeat center/cover fixed;
+    }
+    */
 
     body {
       display: flex;
       flex-direction: column;
       min-height: 100vh;
-      overflow-x: hidden;
     }
 
-    main {
-      flex: 1; /* pousse le footer en bas */
-      max-width: 800px;
-      margin: 2rem auto;
-      padding: 0 1rem;
-      position: relative;
-      z-index: 2;
+    /* --- CADRE CENTRAL --- */
+    header, main, footer {
+      max-width: 1000px;
+      margin: 0 auto;
+      background: var(--content-bg);
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     }
 
     header {
-      background: #2c3e50;
-      color: white;
-      text-align: center;
-      padding: 2rem 1rem;
-      position: relative;
-      z-index: 2;
+      margin-top: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      background: var(--main);
+      color: var(--dark);
+    }
+
+    header img {
+      width: 120px;
+      height: 120px;
+      border-radius: 8px;
+      object-fit: cover;
     }
 
     header h1 {
       margin: 0;
-      font-size: 2.5rem;
+      font-size: 2.2rem;
     }
 
     header p {
-      font-size: 1.2rem;
       margin: 0.5rem 0 0;
     }
 
-    section {
-      margin-bottom: 2rem;
+    header a {
+      color: var(--dark);
+      font-weight: bold;
+    }
+
+    main {
+      flex: 1;
+      margin-top: 1.5rem;
+      margin-bottom: 1.5rem;
     }
 
     h2 {
-      color: #2c3e50;
-      border-bottom: 2px solid #2c3e50;
+      color: var(--dark);
+      border-bottom: 2px solid var(--main);
       padding-bottom: 0.3rem;
       margin-bottom: 1rem;
     }
 
     ul {
       list-style: none;
-      padding: 0;
+      padding-left: 0;
     }
 
     li {
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.6rem;
+      position: relative;
+      padding-left: 1.2rem;
+    }
+
+    li::before {
+      content: "▸";
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: var(--main);
+      font-size: 1.2rem;
+      line-height: 1rem;
     }
 
     footer {
+      background: var(--main);
       text-align: center;
-      padding: 1rem;
-      background: #2c3e50;
-      color: white;
-      position: relative;
-      z-index: 2;
-      margin-top: auto;
+      color: var(--dark);
+      margin-bottom: 2rem;
     }
 
     a {
-      color: #3498db;
+      color: var(--dark);
       text-decoration: none;
     }
-
-    /* --- CANVAS DES FLAMMES --- */
-    /*#flame {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 1;
-    }*/
   </style>
 </head>
 
+
 <body>
-  <!-- Canevas des flammes -->
-  <!-- <canvas id="flame"></canvas> -->
 
   <header>
     <img src="images/portrait.jpg" alt="Photo portrait" />
-    <h1>Oscar Gledel</h1>
-    <p>
-      <a href="mailto:ogledel@gmail.com" target="_blank">ogledel@gmail.com</a> ·
-      <a href="https://github.com/Oscosc" target="_blank">GitHub</a> ·
-      <a href="https://www.linkedin.com/in/oscar-gledel-2370302a9" target="_blank">LinkedIn</a>
-    </p>
+    <div>
+      <h1>Oscar Gledel</h1>
+      <p>
+        <a href="mailto:ogledel@gmail.com" target="_blank">ogledel@gmail.com</a> ·
+        <a href="https://github.com/Oscosc" target="_blank">GitHub</a> ·
+        <a href="https://www.linkedin.com/in/oscar-gledel-2370302a9" target="_blank">LinkedIn</a>
+      </p>
+    </div>
   </header>
 
   <main>
     <section>
       <h2>About</h2>
-      <p>I am a final-year Master's student in Artificial Intelligence, with a focus on image processing and computer graphics. I am very interested in academic research and plan to pursue a PhD in the coming years.</p>
+      <p>
+        I am a final-year Master's student in Artificial Intelligence, with a focus on image processing and computer graphics.
+        I am very interested in academic research and plan to pursue a PhD in the coming years.
+      </p>
     </section>
 
     <section>
@@ -123,124 +153,30 @@
       <ul>
         <li>
           <b>Master "Artificial Intelligence, Fundaments and Applications" (IAFA), <em>University of Toulouse</em></b>
-          <p>Specialization in image processing (applied to computer vision, medical imaging, etc) and computer graphics (applied to physically based rendering and modeling)</p>
+          <p>Specialization in image processing (applied to computer vision, medical imaging…) and computer graphics (physically-based rendering and modeling).</p>
         </li>
         <li>
           <b>Bachelor's degree in Computer Science, <em>University of Toulouse</em></b>
-          <p>Basis notions of computer science, such as algorithmic, programming language paradigms, parallel computing, etc</p>
+          <p>Foundational notions of algorithmics, programming paradigms, parallel computing, etc.</p>
         </li>
       </ul>
     </section>
 
     <section>
       <h2>Professional Experience</h2>
+      <p>(To be completed)</p>
     </section>
 
     <section>
       <h2>Personal Projects</h2>
+      <p>(To be completed)</p>
     </section>
   </main>
 
-  <!-- --- SCRIPT TRAÎNÉE DE FLAMMES --- -->
-  <!-- <script>
-  (function () {
-    const canvas = document.getElementById('flame');
-    const ctx = canvas.getContext('2d', { alpha: true });
+  <footer>
+    © 2025 — Oscar Gledel
+  </footer>
 
-    let pointer = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
-    const params = {
-      emitPerMove: 3,
-      emitIdle: 0.5,         // émission continue même sans mouvement
-      maxParticles: 700,
-      gravity: -0.02,
-      wind: 0,
-      particleSize: [6, 20],
-      life: [600, 1500],
-      hueStart: 48,
-      hueEnd: 10,
-      saturation: 90,
-      baseAlpha: 0.85
-    };
-
-    const particles = [];
-
-    function resize() {
-      const dpr = Math.max(1, window.devicePixelRatio || 1);
-      canvas.width = Math.round(window.innerWidth * dpr);
-      canvas.height = Math.round(window.innerHeight * dpr);
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    }
-    resize();
-    window.addEventListener('resize', resize);
-
-    function spawnParticle(x, y) {
-      if (particles.length >= params.maxParticles) return;
-      const size = rand(params.particleSize[0], params.particleSize[1]);
-      const life = rand(params.life[0], params.life[1]);
-      const angle = -Math.PI/2 + (Math.random() - 0.5) * Math.PI/3;
-      const speed = rand(0.1, 1.2);
-      const vx = Math.cos(angle) * speed + (Math.random() - 0.5) * 0.6;
-      const vy = Math.sin(angle) * speed + (Math.random() - 0.5) * 0.6 + params.gravity;
-      const hue = rand(params.hueStart, params.hueEnd);
-      const alpha = params.baseAlpha * (0.6 + Math.random() * 0.5);
-      particles.push({x, y, vx, vy, size, life, age: 0, hue, alpha});
-    }
-
-    function rand(a,b){return a + Math.random()*(b-a);}
-
-    window.addEventListener('mousemove', e=>{
-      pointer.x = e.clientX;
-      pointer.y = e.clientY;
-      for(let i=0;i<params.emitPerMove;i++) spawnParticle(pointer.x, pointer.y);
-    });
-
-    // Animation : même sans mouvement, on émet un peu au centre ou dernière position
-    function update(dt){
-      // émission permanente
-      if (Math.random() < params.emitIdle) {
-        for (let i = 0; i < 2; i++) {
-          spawnParticle(pointer.x + rand(-5,5), pointer.y + rand(-5,5));
-        }
-      }
-
-      for(let i=particles.length-1;i>=0;i--){
-        const p=particles[i];
-        p.age+=dt;
-        if(p.age>p.life){particles.splice(i,1);continue;}
-        p.vx += params.wind*0.001*dt;
-        p.vy += params.gravity*0.0018*dt;
-        p.x += p.vx*dt;
-        p.y += p.vy*dt;
-      }
-    }
-
-    function draw(){
-      ctx.clearRect(0,0,canvas.width,canvas.height);
-      ctx.globalCompositeOperation='lighter';
-      for(const p of particles){
-        const lifeRatio=p.age/p.life;
-        const grd=ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.size);
-        const a=p.alpha*(1-lifeRatio);
-        grd.addColorStop(0,`hsla(${p.hue},${params.saturation}%,60%,${a})`);
-        grd.addColorStop(0.5,`hsla(${p.hue},${params.saturation}%,40%,${a})`);
-        grd.addColorStop(1,`hsla(${params.hueEnd},${params.saturation}%,20%,0)`);
-        ctx.fillStyle=grd;
-        ctx.beginPath();
-        ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
-        ctx.fill();
-      }
-      ctx.globalCompositeOperation='source-over';
-    }
-
-    let last=performance.now();
-    function loop(now){
-      const dt=now-last;last=now;
-      update(dt);
-      draw();
-      requestAnimationFrame(loop);
-    }
-    requestAnimationFrame(loop);
-  })();
-  </script> -->
 </body>
 </html>
+
