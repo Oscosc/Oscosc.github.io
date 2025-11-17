@@ -86,7 +86,7 @@
     }
 
     /* --- CANVAS DES FLAMMES --- */
-    #flame {
+    /*#flame {
       position: fixed;
       top: 0;
       left: 0;
@@ -94,13 +94,13 @@
       height: 100%;
       pointer-events: none;
       z-index: 1;
-    }
+    }*/
   </style>
 </head>
 
 <body>
   <!-- Canevas des flammes -->
-  <canvas id="flame"></canvas>
+  <!-- <canvas id="flame"></canvas> -->
 
   <header>
     <h1>Oscar Gledel</h1>
@@ -131,12 +131,8 @@
     </section>
   </main>
 
-  <footer>
-    © 2025 Oscar Gledel — <a href="https://github.com/Oscosc/oscosc.github.io">Code source sur GitHub</a>
-  </footer>
-
   <!-- --- SCRIPT TRAÎNÉE DE FLAMMES --- -->
-  <script>
+  <!-- <script>
   (function () {
     const canvas = document.getElementById('flame');
     const ctx = canvas.getContext('2d', { alpha: true });
@@ -235,6 +231,6 @@
     }
     requestAnimationFrame(loop);
   })();
-  </script>
+  </script> -->
 </body>
 </html>
