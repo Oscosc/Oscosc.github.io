@@ -16,34 +16,27 @@
     }
 
     html, body {
-      height: 100%;
+      height: auto;                /* important : permet le scroll naturel */
       margin: 0;
-      padding: 0;
+      padding: 1rem;               /* marge minimum autour du container */
       font-family: "Segoe UI", Roboto, sans-serif;
       font-size: 18px;
       background: var(--outer-bg);
     }
-
-    /* Pour mettre une IMAGE de fond à la place :
+    
     body {
-      background: url("images/background.jpg") no-repeat center/cover fixed;
+      display: block;              /* en mode bloc normal → scroll OK */
     }
-    */
-
-    body {
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-    }
-
+    
     /* --- CADRE CENTRAL --- */
     .container {
       max-width: 1000px;
-      margin: 2rem auto;
+      width: calc(100% - 2rem);    /* assure toujours une marge visible */
+      margin: 0 auto;
       background: var(--content-bg);
       border-radius: 10px;
       box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-      overflow: hidden; /* fusion propre du header et du contenu */
+      overflow: visible;           /* surtout pas hidden → coupe le scroll */
     }
 
     /* --- HEADER --- */
