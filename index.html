@@ -37,20 +37,21 @@
     }
 
     /* --- CADRE CENTRAL --- */
-    header, main, footer {
+    .container {
       max-width: 1000px;
-      margin: 0 auto;
+      margin: 2rem auto;
       background: var(--content-bg);
-      padding: 2rem;
       border-radius: 10px;
       box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      overflow: hidden; /* fusion propre du header et du contenu */
     }
 
+    /* --- HEADER --- */
     header {
-      margin-top: 2rem;
       display: flex;
       align-items: center;
       gap: 2rem;
+      padding: 2rem;
       background: var(--main);
       color: var(--dark);
     }
@@ -76,10 +77,9 @@
       font-weight: bold;
     }
 
+    /* --- MAIN --- */
     main {
-      flex: 1;
-      margin-top: 1.5rem;
-      margin-bottom: 1.5rem;
+      padding: 2rem;
     }
 
     h2 {
@@ -110,13 +110,6 @@
       line-height: 1rem;
     }
 
-    footer {
-      background: var(--main);
-      text-align: center;
-      color: var(--dark);
-      margin-bottom: 2rem;
-    }
-
     a {
       color: var(--dark);
       text-decoration: none;
@@ -127,56 +120,55 @@
 
 <body>
 
-  <header>
-    <img src="images/portrait.jpg" alt="Photo portrait" />
-    <div>
-      <h1>Oscar Gledel</h1>
-      <p>
-        <a href="mailto:ogledel@gmail.com" target="_blank">ogledel@gmail.com</a> ·
-        <a href="https://github.com/Oscosc" target="_blank">GitHub</a> ·
-        <a href="https://www.linkedin.com/in/oscar-gledel-2370302a9" target="_blank">LinkedIn</a>
-      </p>
-    </div>
-  </header>
+  <div class="container">
 
-  <main>
-    <section>
-      <h2>About</h2>
-      <p>
-        I am a final-year Master's student in Artificial Intelligence, with a focus on image processing and computer graphics.
-        I am very interested in academic research and plan to pursue a PhD in the coming years.
-      </p>
-    </section>
+    <header>
+      <img src="images/portrait.jpg" alt="Photo portrait" />
+      <div>
+        <h1>Oscar Gledel</h1>
+        <p>
+          <a href="mailto:ogledel@gmail.com" target="_blank">ogledel@gmail.com</a> ·
+          <a href="https://github.com/Oscosc" target="_blank">GitHub</a> ·
+          <a href="https://www.linkedin.com/in/oscar-gledel-2370302a9" target="_blank">LinkedIn</a>
+        </p>
+      </div>
+    </header>
 
-    <section>
-      <h2>Academic Background</h2>
-      <ul>
-        <li>
-          <b>Master "Artificial Intelligence, Fundaments and Applications" (IAFA), <em>University of Toulouse</em></b>
-          <p>Specialization in image processing (applied to computer vision, medical imaging…) and computer graphics (physically-based rendering and modeling).</p>
-        </li>
-        <li>
-          <b>Bachelor's degree in Computer Science, <em>University of Toulouse</em></b>
-          <p>Foundational notions of algorithmics, programming paradigms, parallel computing, etc.</p>
-        </li>
-      </ul>
-    </section>
+    <main>
+      <section>
+        <h2>About</h2>
+        <p>
+          I am a final-year Master's student in Artificial Intelligence, with a focus on image processing and computer graphics.
+          I am very interested in academic research and plan to pursue a PhD in the coming years.
+        </p>
+      </section>
 
-    <section>
-      <h2>Professional Experience</h2>
-      <p>(To be completed)</p>
-    </section>
+      <section>
+        <h2>Academic Background</h2>
+        <ul>
+          <li>
+            <b>Master "Artificial Intelligence, Fundaments and Applications" (IAFA), <em>University of Toulouse</em></b>
+            <p>Specialization in image processing (applied to computer vision, medical imaging…) and computer graphics (physically-based rendering and modeling).</p>
+          </li>
+          <li>
+            <b>Bachelor's degree in Computer Science, <em>University of Toulouse</em></b>
+            <p>Foundational notions of algorithmics, programming paradigms, parallel computing, etc.</p>
+          </li>
+        </ul>
+      </section>
 
-    <section>
-      <h2>Personal Projects</h2>
-      <p>(To be completed)</p>
-    </section>
-  </main>
+      <section>
+        <h2>Professional Experience</h2>
+        <p>(To be completed)</p>
+      </section>
 
-  <footer>
-    © 2025 — Oscar Gledel
-  </footer>
+      <section>
+        <h2>Personal Projects</h2>
+        <p>(To be completed)</p>
+      </section>
+    </main>
+
+  </div>
 
 </body>
 </html>
-
