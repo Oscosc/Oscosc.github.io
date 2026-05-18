@@ -1,0 +1,18 @@
+h1 {
+	text-align: center;
+}
+
+.portrait {
+    width: 200px;
+    height: 200px;
+    display: block;
+    margin: auto;
+    object-fit: cover;
+}
+
+table, th, td {
+    padding: 15px;
+    border: 1px solid beige;
+    border-collapse: collapse;
+    vertical-align: top;
+  }
