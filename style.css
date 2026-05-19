@@ -1,18 +1,68 @@
+body {
+    background-color:ivory;
+    margin: 0;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+
+    background-color: rgb(245, 239, 220);
+
+    min-height: 100vh; 
+    box-sizing: border-box;
+}
+
 h1 {
-	text-align: center;
+    text-align: center;
+}
+
+.row {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.align-center {
+    align-items: center;
+}
+
+.text-content {
+    flex: 1;
+    text-align: justify;
+}
+
+.about {
+    font-size: larger;
+}
+
+.contact {
+    font-size: larger;
+    text-align: right;
 }
 
 .portrait {
     width: 200px;
     height: 200px;
     display: block;
-    margin: auto;
     object-fit: cover;
 }
 
-table, th, td {
-    padding: 15px;
-    border: 1px solid beige;
-    border-collapse: collapse;
-    vertical-align: top;
-  }
+.poster {
+    width: 200px;
+    height: 283px;
+}
+
+.text-title {
+    margin-top: 0;
+    font-size: larger;
+    font-weight: bold;
+}
+
+.project-cover {
+    width: 175px;
+    height: 175px;
+    display: block;
+    object-fit: cover;
+}
